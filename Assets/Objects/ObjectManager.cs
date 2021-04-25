@@ -85,7 +85,7 @@ public class ObjectManager : MonoBehaviour
       float phase = Mathf.PingPong(Time.time + coinRoadOffset, coinFunctionSpeed) / coinFunctionSpeed;
       float extent = gm.screenXMax * coinExtentent;
       Vector3 pos = new Vector3(
-        coinRoadF.Invoke(-extent, extent, phase),
+        EasingFunction.EaseInOutQuad(-extent, extent, phase),
         -gm.screenYMax - 1.0f,
         0.0f
       );

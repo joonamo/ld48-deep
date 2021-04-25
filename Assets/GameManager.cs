@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
     public void addMultiplier() {
         multiplier += 1;
         if (multiplier == targetmultiplier) {
-            Instantiate(goal, new Vector3(0.0f, screenYMax + 5.0f, 0.0f), Quaternion.identity);
+            Instantiate(goal, new Vector3(0.0f, -screenYMax - 5.0f, 0.0f), Quaternion.identity);
         }
     }
 }

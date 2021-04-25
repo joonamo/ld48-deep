@@ -48,7 +48,7 @@ MonoBehaviour:
   coin: {fileID: 2759878329411327200, guid: 2cc70f0f33a3445d09a316f0a2d8520d, type: 3}
   megaCoin: {fileID: 2759878329411327200, guid: d278805883a0a4216b986106793e2c92, type: 3}
   coinInterval: 0.2
-  timeToNextCoin: 0
+  timeToNextCoin: 2
   multiplierTime: 30
   coinRoad: 2
   coinFunctionSpeed: 7

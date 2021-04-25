@@ -10,6 +10,8 @@ public class player : MonoBehaviour
     public float terminalVel = -3.0f;
     public float extSpeed = 0.0f;
 
+    public float depthTarget = -4.0f;
+
     public float verSpeed = 0.0f;
     public float verSpeedDampen = 1.0f;
     public float verSpeedMin = 1.0f;
@@ -25,14 +27,14 @@ public class player : MonoBehaviour
     }
 
     float yPer(float offset = 0.0f) {
-        return transform.position.y / (gm.screenXMax + offset);
+        return Mathf.Clamp01(transform.position.y + depthTarget / (gm.screenXMax + offset - depthTarget));
     }
 
     // Update is called once per frame
     void Update()
     {
         float y = transform.position.y;
-        float clampY = Mathf.Clamp(y, 0.0f, 1.0f);
+        float clampY = Mathf.Clamp(y - depthTarget, 0.0f, 1.0f);
         extSpeed = speed > 0 ? 0: speed * (1.0f - clampY);
         float locSpeed = speed - extSpeed;
 
@@ -57,7 +59,7 @@ public class player : MonoBehaviour
 
     public void Jump(float direction) {
         float p = yPer(-1.0f);
-        this.speed = jumpImpact.y * (0.5f + 0.5f * (1.0f - p * p));
+        this.speed = jumpImpact.y * (0.3f + 0.7f * (1.0f - p * p));
         this.verSpeed = jumpImpact.x * direction;
     }
 
