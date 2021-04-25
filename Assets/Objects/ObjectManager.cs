@@ -7,6 +7,20 @@ public class ObjectManager : MonoBehaviour
   GameManager gm;
   public GameObject leftWall;
   public GameObject rightWall;
+  public GameObject coin;
+  public GameObject megaCoin;
+
+  public float coinInterval = 0.5f;
+  public float timeToNextCoin = 0.0f;
+  int coinsSpawned = 0;
+  public int multiplierTime = 100;
+  public EasingFunction.Ease coinRoad = EasingFunction.Ease.EaseInOutQuint;
+  EasingFunction.Function coinRoadF;
+  public float coinFunctionSpeed = 20.0f;
+  public float coinExtentent = 0.7f;
+  public float coinRoadOffset = 0.0f;
+  public float offsetChance = 0.05f;
+  public float offsetAmount = 30.0f;
 
   public List<GameObject> dangerObjects = new List<GameObject>();
   public float dangerMinTime = 1.0f;
@@ -23,6 +37,8 @@ public class ObjectManager : MonoBehaviour
   void Start()
   {
     gm = GameObject.FindObjectOfType<GameManager>();
+
+    coinRoadF = EasingFunction.GetEasingFunction(coinRoad);
 
     for (int i = -1; i <= 1; i++)
     {
@@ -62,6 +78,27 @@ public class ObjectManager : MonoBehaviour
 
       float r = Random.Range(0.0f, 1.0f);
       timeToNextCliff = Mathf.Lerp(cliffMinTime, cliffMaxTime, r * r);
+    }
+
+    timeToNextCoin = timeToNextCoin - Time.deltaTime;
+    if (timeToNextCoin <= 0.0f) {
+      float phase = Mathf.PingPong(Time.time + coinRoadOffset, coinFunctionSpeed) / coinFunctionSpeed;
+      float extent = gm.screenXMax * coinExtentent;
+      Vector3 pos = new Vector3(
+        coinRoadF.Invoke(-extent, extent, phase),
+        -gm.screenYMax - 1.0f,
+        0.0f
+      );
+      
+      var o = coinsSpawned > 0 && coinsSpawned % multiplierTime == 0 ? megaCoin : coin;
+      Instantiate(o, pos, Quaternion.identity);
+
+      timeToNextCoin = coinInterval;
+      coinsSpawned++;
+
+      if (Random.Range(0.0f, 1.0f) < offsetChance) {
+        coinRoadOffset += Random.Range(offsetAmount * 0.5f, offsetAmount);
+      }
     }
   }
 }

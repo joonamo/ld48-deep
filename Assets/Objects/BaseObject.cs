@@ -11,7 +11,9 @@ public enum ContactJump {
 
 public enum ContactAction {
     damage,
-    score
+    score,
+    multiplier,
+    goal
 }
 
 public class BaseObject : MonoBehaviour
@@ -64,6 +66,27 @@ public class BaseObject : MonoBehaviour
                     } else {
                          p.JumpLeft();
                     }
+                    break;
+                }
+            }
+
+            switch (contactAction) {
+                case (ContactAction.score): {
+                    gm.addPoint();
+                    Destroy(gameObject);
+                    break;
+                }
+                case (ContactAction.multiplier): {
+                    gm.addMultiplier();
+                    Destroy(gameObject);
+                    break;
+                }
+                case (ContactAction.damage): {
+                    // TODO
+                    break;
+                }
+                case (ContactAction.goal): {
+                    // TODO
                     break;
                 }
             }

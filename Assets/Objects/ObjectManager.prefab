@@ -45,6 +45,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftWall: {fileID: 2759878329411327200, guid: 3af99c9d98ffd4a4686c6ef6cc9814dd, type: 3}
   rightWall: {fileID: 2759878329411327200, guid: 27680c62ba6394db8aef9a80bb77eaed, type: 3}
+  coin: {fileID: 2759878329411327200, guid: 2cc70f0f33a3445d09a316f0a2d8520d, type: 3}
+  megaCoin: {fileID: 2759878329411327200, guid: d278805883a0a4216b986106793e2c92, type: 3}
+  coinInterval: 0.2
+  timeToNextCoin: 0
+  multiplierTime: 30
+  coinRoad: 2
+  coinFunctionSpeed: 7
+  coinExtentent: 0.5
+  coinRoadOffset: 0
+  offsetChance: 0.1
+  offsetAmount: 30
   dangerObjects:
   - {fileID: 2759878329411327200, guid: e1d76d2768457468e81bddce1703401c, type: 3}
   - {fileID: 2759878329411327200, guid: ede1a340827714e20a3398c5de59226b, type: 3}
