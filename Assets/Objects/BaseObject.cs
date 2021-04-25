@@ -41,35 +41,28 @@ public class BaseObject : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    switch (gm.state)
+    if (!staticOnly && gm.state == GameState.game)
     {
-      case (GameState.game):
+      if (!stopAtZero || transform.position.y < 0.0f)
+      {
+        transform.Translate(0.0f, gm.generalSpeed * Time.deltaTime, 0.0f);
+        if (transform.position.y > gm.screenYMax + yExtent)
         {
-          if (staticOnly)
+          if (wrapping)
           {
-            break;
+            this.transform.position =
+                new Vector3(
+                    transform.position.x,
+                    -gm.screenYMax - yExtent,
+                    transform.position.z);
           }
-          if (!stopAtZero || transform.position.y < 0.0f)
+          else
           {
-            transform.Translate(0.0f, gm.generalSpeed * Time.deltaTime, 0.0f, Space.World);
-            if (transform.position.y > gm.screenYMax + yExtent)
-            {
-              if (wrapping)
-              {
-                this.transform.position =
-                    new Vector3(
-                        transform.position.x,
-                        -gm.screenYMax - yExtent,
-                        transform.position.z);
-              }
-              else
-              {
-                GameObject.Destroy(gameObject);
-              }
-            }
+            GameObject.Destroy(gameObject);
           }
-          break;
         }
+      }
+
     }
   }
 
