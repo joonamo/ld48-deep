@@ -49,5 +49,7 @@ MonoBehaviour:
   player: {fileID: 0}
   score: 0
   multiplier: 1
-  targetmultiplier: 2
+  targetmultiplier: 4
   goal: {fileID: 2759878329411327200, guid: 54d4bd42167c54d2e9c3ca1ff8542cc2, type: 3}
+  state: 0
+  stateChangeTime: 0

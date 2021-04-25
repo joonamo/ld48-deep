@@ -4,70 +4,86 @@ using UnityEngine;
 
 public class player : MonoBehaviour
 {
-    public float speed = 0.0f;
-    public float gravity = -9.0f;
-    public float extraGravity = -10.0f;
-    public float terminalVel = -3.0f;
-    public float extSpeed = 0.0f;
+  public float speed = 0.0f;
+  public float gravity = -9.0f;
+  public float extraGravity = -10.0f;
+  public float terminalVel = -3.0f;
+  public float extSpeed = 0.0f;
 
-    public float depthTarget = -4.0f;
+  public float depthTarget = -4.0f;
 
-    public float verSpeed = 0.0f;
-    public float verSpeedDampen = 1.0f;
-    public float verSpeedMin = 1.0f;
-    public Vector3 jumpImpact = new Vector3();
+  public float verSpeed = 0.0f;
+  public float verSpeedDampen = 1.0f;
+  public float verSpeedMin = 1.0f;
+  public Vector3 jumpImpact = new Vector3();
 
-    GameManager gm;
+  GameManager gm;
 
-    // Start is called before the first frame update
-    void Start()
+  // Start is called before the first frame update
+  void Start()
+  {
+    gm = GameObject.FindObjectOfType<GameManager>();
+    gm.registerPlayer(this);
+  }
+
+  float yPer(float offset = 0.0f)
+  {
+    return Mathf.Clamp01(transform.position.y + depthTarget / (gm.screenXMax + offset - depthTarget));
+  }
+
+  // Update is called once per frame
+  void Update()
+  {
+    switch (gm.state)
     {
-        gm = GameObject.FindObjectOfType<GameManager>();
-        gm.registerPlayer(this);
-    }
+      case (GameState.game):
+        {
+          float y = transform.position.y;
+          float clampY = Mathf.Clamp(y - depthTarget, 0.0f, 1.0f);
+          extSpeed = speed > 0 ? 0 : speed * (1.0f - clampY);
+          float locSpeed = speed - extSpeed;
 
-    float yPer(float offset = 0.0f) {
-        return Mathf.Clamp01(transform.position.y + depthTarget / (gm.screenXMax + offset - depthTarget));
-    }
+          transform.Translate(verSpeed * Time.deltaTime, locSpeed * Time.deltaTime, 0);
 
-    // Update is called once per frame
-    void Update()
-    {
-        float y = transform.position.y;
-        float clampY = Mathf.Clamp(y - depthTarget, 0.0f, 1.0f);
-        extSpeed = speed > 0 ? 0: speed * (1.0f - clampY);
-        float locSpeed = speed - extSpeed;
-
-        transform.Translate(verSpeed * Time.deltaTime, locSpeed * Time.deltaTime, 0);
-
-        float locGravity = gravity; //+ (yPer * yPer) * extraGravity;
-        if (speed > terminalVel) {
+          float locGravity = gravity; //+ (yPer * yPer) * extraGravity;
+          if (speed > terminalVel)
+          {
             speed = speed + locGravity * Time.deltaTime;
-        }
+          }
 
-        float absVerSpeed = Mathf.Abs(verSpeed);
-        if (absVerSpeed > verSpeedMin) {
-            verSpeed = Mathf.Sign(verSpeed) * (absVerSpeed - verSpeedDampen * Time.deltaTime );
-        }
+          float absVerSpeed = Mathf.Abs(verSpeed);
+          if (absVerSpeed > verSpeedMin)
+          {
+            verSpeed = Mathf.Sign(verSpeed) * (absVerSpeed - verSpeedDampen * Time.deltaTime);
+          }
 
-        if (Input.GetButtonDown("Right")) {
+          if (Input.GetButtonDown("Right"))
+          {
             JumpRight();
-        } else if (Input.GetButtonDown("Left")) {
+          }
+          else if (Input.GetButtonDown("Left"))
+          {
             JumpLeft();
+          }
+          break;
         }
     }
+  }
 
-    public void Jump(float direction) {
-        float p = yPer(-1.0f);
-        this.speed = jumpImpact.y * (0.3f + 0.7f * (1.0f - p * p));
-        this.verSpeed = jumpImpact.x * direction;
-    }
+  public void Jump(float direction)
+  {
+    float p = yPer(-1.0f);
+    this.speed = jumpImpact.y * (0.3f + 0.7f * (1.0f - p * p));
+    this.verSpeed = jumpImpact.x * direction;
+  }
 
-    public void JumpRight() {
-        Jump(-1.0f);
-    }
-     
-    public void JumpLeft() {
-        Jump(1.0f);
-    }
+  public void JumpRight()
+  {
+    Jump(-1.0f);
+  }
+
+  public void JumpLeft()
+  {
+    Jump(1.0f);
+  }
 }
