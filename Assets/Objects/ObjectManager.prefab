@@ -47,6 +47,11 @@ MonoBehaviour:
   rightWall: {fileID: 2759878329411327200, guid: 27680c62ba6394db8aef9a80bb77eaed, type: 3}
   dangerObjects:
   - {fileID: 2759878329411327200, guid: e1d76d2768457468e81bddce1703401c, type: 3}
-  minTime: 0.2
-  maxTime: 3
-  timeToNext: 0
+  dangerMinTime: 1
+  dangerMaxTime: 3
+  timeToNextDanger: 5
+  cliffObjects:
+  - {fileID: 2759878329411327200, guid: abf0c14acb9c74e5fbfd8627b876ab7b, type: 3}
+  cliffMinTime: 0.2
+  cliffMaxTime: 2
+  timeToNextCliff: 1
