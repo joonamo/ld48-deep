@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public enum GameState
 {
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
   public int score = 0;
   public int multiplier = 1;
-  public int targetmultiplier = 3;
+  public int multiplierGoal = 4;
 
   public GameObject goal;
 
@@ -55,7 +56,7 @@ public class GameManager : MonoBehaviour
       case (GameState.gameOver): {
           if (Input.GetButtonDown("Button"))
           {
-            Application.LoadLevel(Application.loadedLevel);
+            SceneManager.LoadScene(0);
           }
         break;
       }
@@ -92,7 +93,7 @@ public class GameManager : MonoBehaviour
   public void addMultiplier()
   {
     multiplier += 1;
-    if (multiplier == targetmultiplier)
+    if (multiplier == multiplierGoal)
     {
       Instantiate(goal, new Vector3(0.0f, -screenYMax() - 5.0f, 0.0f), Quaternion.identity);
     }
