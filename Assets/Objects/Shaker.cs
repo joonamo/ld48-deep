@@ -16,6 +16,10 @@ public class Shaker : MonoBehaviour
     void Update()
     {
         float phase = Mathf.PingPong( Time.time, interval) / interval;
-        transform.eulerAngles = new Vector3(0.0f, 0.0f, EasingFunction.EaseInOutCubic(-maximum, maximum, phase));
+        transform.eulerAngles = new Vector3(
+            transform.eulerAngles.x,
+            transform.eulerAngles.y,
+            EasingFunction.EaseInOutCubic(-maximum, maximum, phase)
+        );
     }
 }

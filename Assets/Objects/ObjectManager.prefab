@@ -57,13 +57,17 @@ MonoBehaviour:
   offsetChance: 0.1
   offsetAmount: 30
   dangerObjects:
-  - {fileID: 2759878329411327200, guid: e1d76d2768457468e81bddce1703401c, type: 3}
+  - {fileID: 2759878329411327200, guid: ede1a340827714e20a3398c5de59226b, type: 3}
   - {fileID: 2759878329411327200, guid: ede1a340827714e20a3398c5de59226b, type: 3}
   dangerMinTime: 1
   dangerMaxTime: 3
   timeToNextDanger: 5
   cliffObjects:
   - {fileID: 2759878329411327200, guid: abf0c14acb9c74e5fbfd8627b876ab7b, type: 3}
+  - {fileID: 2759878329411327200, guid: 0e47790a46bb34562a9e98b0f1b7bb89, type: 3}
+  - {fileID: 2759878329411327200, guid: 066b4e6d4a7694b7e9becde559c7e3c2, type: 3}
+  - {fileID: 2759878329411327200, guid: d44fd0ee70da04e79a65643f4adc85c9, type: 3}
+  - {fileID: 2759878329411327200, guid: e2407cac6b7e84ee29074e763694a1a9, type: 3}
   cliffMinTime: 0.2
   cliffMaxTime: 2
   timeToNextCliff: 1

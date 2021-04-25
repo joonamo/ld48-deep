@@ -28,6 +28,8 @@ public class BaseObject : MonoBehaviour
   public ContactJump contactJump = ContactJump.none;
   public ContactAction contactAction = ContactAction.damage;
 
+  public MeshFilter myMesh;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -122,5 +124,23 @@ public class BaseObject : MonoBehaviour
           }
       }
     }
+  }
+
+  Transform getRendable() {
+    if (!myMesh) {
+      myMesh = GetComponentInChildren<MeshFilter>();
+    }
+    return myMesh.transform;
+  }
+
+  public void Flippendo() {
+    // print("flip");
+    transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
+  }
+
+  public void FlippendoMaximus()
+  {
+    // print("flop");
+    transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
   }
 }

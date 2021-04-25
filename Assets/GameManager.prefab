@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   screenYMax: 9
-  screenXMax: 6
+  screenXMax: 5.5
   generalSpeed: 10
   player: {fileID: 0}
   score: 0

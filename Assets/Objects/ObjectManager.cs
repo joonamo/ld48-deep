@@ -50,55 +50,68 @@ public class ObjectManager : MonoBehaviour
   // Update is called once per frame
   void Update()
   {
-    timeToNextDanger = timeToNextDanger - Time.deltaTime;
-    if (timeToNextDanger <= 0.0f)
+    switch (gm.state)
     {
-      GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count)];
-      var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
-      float xExtent = gm.screenXMax - newObject.transform.lossyScale.x * 0.5f;
-      newObject.transform.position = new Vector3(
-          Random.Range(-xExtent, xExtent),
-          -gm.screenYMax - newObject.transform.lossyScale.y,
-          0.0f);
-      float r = Random.Range(0.0f, 1.0f);
-      timeToNextDanger = Mathf.Lerp(dangerMinTime, dangerMaxTime, r * r);
-    }
+      case (GameState.game):
+        {
+          timeToNextDanger = timeToNextDanger - Time.deltaTime;
+          if (timeToNextDanger <= 0.0f)
+          {
+            GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count)];
+            var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
+            float xExtent = gm.screenXMax - newObject.transform.lossyScale.x * 1.5f;
+            newObject.transform.position = new Vector3(
+                Random.Range(-xExtent, xExtent),
+                -gm.screenYMax - newObject.transform.lossyScale.y,
+                0.0f);
+            float r = Random.Range(0.0f, 1.0f);
+            timeToNextDanger = Mathf.Lerp(dangerMinTime, dangerMaxTime, r * r);
+          }
 
-    timeToNextCliff = timeToNextCliff - Time.deltaTime;
-    if (timeToNextCliff <= 0.0f)
-    {
-      GameObject toSpawn = cliffObjects[Random.Range(0, cliffObjects.Count)];
-      var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
-      float side = Random.Range(-1.0f, 1.0f) < 0.0f ? -1.0f : 1.0f;
-      var extent = newObject.transform.lossyScale;
-      newObject.transform.position = new Vector3(
-          side * gm.screenXMax - side * extent.x * 0.5f, //Random.Range(0.0f, extent.x * 0.7f),
-          -gm.screenYMax - extent.y * 0.5f,
-          0.0f);
+          timeToNextCliff = timeToNextCliff - Time.deltaTime;
+          if (timeToNextCliff <= 0.0f)
+          {
+            GameObject toSpawn = cliffObjects[Random.Range(0, cliffObjects.Count)];
+            var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
+            BaseObject newBase = newObject.GetComponent<BaseObject>();
+            float side = Random.Range(-1.0f, 1.0f) < 0.0f ? -1.0f : 1.0f;
+            var extent = newObject.transform.lossyScale;
+            newObject.transform.position = new Vector3(
+                side * gm.screenXMax - side * extent.x * 0.56f, //Random.Range(0.0f, extent.x * 0.7f),
+                -gm.screenYMax - extent.y * 0.5f,
+                0.0f);
+            if (side < 0.0f) {
+              newBase.Flippendo();
+            }
 
-      float r = Random.Range(0.0f, 1.0f);
-      timeToNextCliff = Mathf.Lerp(cliffMinTime, cliffMaxTime, r * r);
-    }
+            float r = Random.Range(0.0f, 1.0f);
+            timeToNextCliff = Mathf.Lerp(cliffMinTime, cliffMaxTime, r * r);
+          }
 
-    timeToNextCoin = timeToNextCoin - Time.deltaTime;
-    if (timeToNextCoin <= 0.0f) {
-      float phase = Mathf.PingPong(Time.time + coinRoadOffset, coinFunctionSpeed) / coinFunctionSpeed;
-      float extent = gm.screenXMax * coinExtentent;
-      Vector3 pos = new Vector3(
-        EasingFunction.EaseInOutQuad(-extent, extent, phase),
-        -gm.screenYMax - 1.0f,
-        0.0f
-      );
-      
-      var o = coinsSpawned > 0 && coinsSpawned % multiplierTime == 0 ? megaCoin : coin;
-      Instantiate(o, pos, Quaternion.identity);
+          timeToNextCoin = timeToNextCoin - Time.deltaTime;
+          if (timeToNextCoin <= 0.0f)
+          {
+            float phase = Mathf.PingPong(Time.time + coinRoadOffset, coinFunctionSpeed) / coinFunctionSpeed;
+            float extent = gm.screenXMax * coinExtentent;
+            Vector3 pos = new Vector3(
+              EasingFunction.EaseInOutQuad(-extent, extent, phase),
+              -gm.screenYMax - 1.0f,
+              0.0f
+            );
 
-      timeToNextCoin = coinInterval;
-      coinsSpawned++;
+            var o = coinsSpawned > 0 && coinsSpawned % multiplierTime == 0 ? megaCoin : coin;
+            Instantiate(o, pos, Quaternion.identity);
 
-      if (Random.Range(0.0f, 1.0f) < offsetChance) {
-        coinRoadOffset += Random.Range(offsetAmount * 0.5f, offsetAmount);
-      }
+            timeToNextCoin = coinInterval;
+            coinsSpawned++;
+
+            if (Random.Range(0.0f, 1.0f) < offsetChance)
+            {
+              coinRoadOffset += Random.Range(offsetAmount * 0.5f, offsetAmount);
+            }
+          }
+          break;
+        }
     }
   }
 }
