@@ -65,7 +65,7 @@ public class ObjectManager : MonoBehaviour
             newObject.transform.position = new Vector3(
                 Random.Range(-xExtent, xExtent),
                 -gm.screenYMax - newObject.transform.lossyScale.y,
-                0.0f);
+                -0.1f);
             float r = Random.Range(0.0f, 1.0f);
             timeToNextDanger = Mathf.Lerp(dangerMinTime, dangerMaxTime, r * r);
           }
@@ -88,7 +88,7 @@ public class ObjectManager : MonoBehaviour
             newObject.transform.position = new Vector3(
                 side * gm.screenXMax - side * extent.x * 0.56f, //Random.Range(0.0f, extent.x * 0.7f),
                 -gm.screenYMax - extent.y * 0.5f,
-                0.0f);
+                -0.2f);
             if (side < 0.0f) {
               newBase.Flippendo();
             }

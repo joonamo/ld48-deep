@@ -95,7 +95,7 @@ public class player : MonoBehaviour
     this.verSpeed = jumpImpact.x * direction * verMult;
 
     rend.material.mainTexture = jump;
-    regularTimer = 0.2f;
+    regularTimer = 0.3f;
   }
 
   public void JumpRight()
@@ -110,9 +110,11 @@ public class player : MonoBehaviour
     Jump(1.0f);
   }
 
-  public void MakeHappy() {
-    rend.material.mainTexture = happy;
-    regularTimer = 0.2f;
+  public void MakeHappy(bool veryHappy = false) {
+    if (veryHappy || regularTimer <= 0.0f) {
+      rend.material.mainTexture = happy;
+      regularTimer = 0.2f;
+    }
   }
 
   public void MakeDead() {

@@ -7,7 +7,8 @@ public enum GameState
   menu,
   intro,
   game,
-  outro
+  outro,
+  gameOver
 }
 
 public class GameManager : MonoBehaviour
@@ -30,10 +31,11 @@ public class GameManager : MonoBehaviour
   public GameState state = GameState.menu;
   public float stateChangeTime = 0.0f;
 
+  public List<ShellUI> shellUis = new List<ShellUI>();
+
   // Start is called before the first frame update
   void Start()
   {
-
   }
 
   // Update is called once per frame
@@ -49,6 +51,14 @@ public class GameManager : MonoBehaviour
           }
           break;
         }
+      case (GameState.outro):
+      case (GameState.gameOver): {
+          if (Input.GetButtonDown("Button"))
+          {
+            Application.LoadLevel(Application.loadedLevel);
+          }
+        break;
+      }
     }
   }
 
@@ -77,8 +87,6 @@ public class GameManager : MonoBehaviour
   {
     score += multiplier;
     scoreDisplay.ShowScore(score);
-
-    player.MakeHappy();
   }
 
   public void addMultiplier()
@@ -89,12 +97,18 @@ public class GameManager : MonoBehaviour
       Instantiate(goal, new Vector3(0.0f, -screenYMax - 5.0f, 0.0f), Quaternion.identity);
     }
 
+    foreach (ShellUI shell in shellUis) {
+      if (shell.shellAmount == multiplier) {
+        shell.turnOn();
+      }
+    }
+
     player.MakeHappy();
   }
 
   public void reportGoal() {
     state = GameState.outro;
-    player.MakeHappy();
+    player.MakeHappy(true);
   }
 
   public void reportDeath() {

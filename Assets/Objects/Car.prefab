@@ -92,7 +92,7 @@ GameObject:
   - component: {fileID: 2759878329411327213}
   - component: {fileID: 2759878329411327201}
   - component: {fileID: 3009905675078848532}
-  - component: {fileID: 6237572786891428677}
+  - component: {fileID: 1943894849765822479}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -130,8 +130,10 @@ MonoBehaviour:
   wrapping: 0
   yExtent: 1
   stopAtZero: 0
+  staticOnly: 0
   contactJump: 2
   contactAction: 0
+  myMesh: {fileID: 0}
 --- !u!114 &3009905675078848532
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,8 +148,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interval: 10
   maximum: 50
---- !u!65 &6237572786891428677
-BoxCollider:
+--- !u!136 &1943894849765822479
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -156,6 +158,7 @@ BoxCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 4.21, y: 1.36, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.5
+  m_Height: 3.7
+  m_Direction: 0
+  m_Center: {x: -0.38, y: -0.13, z: 0}

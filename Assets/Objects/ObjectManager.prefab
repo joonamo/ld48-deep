@@ -68,8 +68,8 @@ MonoBehaviour:
   - {fileID: 2759878329411327200, guid: 066b4e6d4a7694b7e9becde559c7e3c2, type: 3}
   - {fileID: 2759878329411327200, guid: d44fd0ee70da04e79a65643f4adc85c9, type: 3}
   - {fileID: 2759878329411327200, guid: e2407cac6b7e84ee29074e763694a1a9, type: 3}
-  cliffMinTime: 0.2
-  cliffMaxTime: 2
+  cliffMinTime: 0.5
+  cliffMaxTime: 3
   timeToNextCliff: 1
   cliffSide: 1
   previousCliff: -1

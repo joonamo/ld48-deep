@@ -44,8 +44,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.1, y: 1, z: 1}
-  m_Center: {x: 0.45, y: 0, z: 0}
+  m_Size: {x: 0.07, y: 0.38, z: 1}
+  m_Center: {x: 0.47, y: 0.09, z: 0}
 --- !u!114 &2759878329411327201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,6 +61,7 @@ MonoBehaviour:
   wrapping: 0
   yExtent: 1
   stopAtZero: 0
+  staticOnly: 0
   contactJump: 3
   contactAction: 0
   myMesh: {fileID: 0}
