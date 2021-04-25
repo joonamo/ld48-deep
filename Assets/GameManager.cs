@@ -13,10 +13,10 @@ public enum GameState
 
 public class GameManager : MonoBehaviour
 {
-  public float screenYMax = 5.0f;
-  public float screenXMax = 5.0f;
+  public float screenYMax() { return 9.0f; }
+  public float screenXMax() { return 5.5f; }
 
-  public float generalSpeed = 10.0f;
+  public float generalSpeed() { return 8.0f; }
 
   public player player;
 
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     multiplier += 1;
     if (multiplier == targetmultiplier)
     {
-      Instantiate(goal, new Vector3(0.0f, -screenYMax - 5.0f, 0.0f), Quaternion.identity);
+      Instantiate(goal, new Vector3(0.0f, -screenYMax() - 5.0f, 0.0f), Quaternion.identity);
     }
 
     foreach (ShellUI shell in shellUis) {

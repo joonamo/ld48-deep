@@ -18,7 +18,7 @@ public class Chaser : MonoBehaviour
   {
     interval = interval + Random.Range(-interval * 0.1f, interval * 0.1f);
     gm = GameObject.FindObjectOfType<GameManager>();
-    extent = gm.screenXMax * maxExtent;
+    extent = gm.screenXMax() * maxExtent;
     myBase = GetComponent<BaseObject>();
   }
 

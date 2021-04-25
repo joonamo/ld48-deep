@@ -38,22 +38,30 @@ public class BaseObject : MonoBehaviour
     gm = GameObject.FindObjectOfType<GameManager>();
   }
 
+  // GameManager getGm() {
+  //   if (!gm) {
+  //     gm = GameObject.FindObjectOfType<GameManager>();
+  //   }
+  //   return gm;
+  // }
+
   // Update is called once per frame
   void Update()
   {
+
     if (!staticOnly && gm.state == GameState.game)
     {
       if (!stopAtZero || transform.position.y < 0.0f)
       {
-        transform.Translate(0.0f, gm.generalSpeed * Time.deltaTime, 0.0f);
-        if (transform.position.y > gm.screenYMax + yExtent)
+        transform.Translate(0.0f, gm.generalSpeed() * Time.deltaTime, 0.0f, Space.World);
+        if (transform.position.y > gm.screenYMax() + yExtent)
         {
           if (wrapping)
           {
-            this.transform.position =
+            transform.position =
                 new Vector3(
                     transform.position.x,
-                    -gm.screenYMax - yExtent,
+                    -gm.screenYMax() - yExtent,
                     transform.position.z);
           }
           else

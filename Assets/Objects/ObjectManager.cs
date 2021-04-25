@@ -44,8 +44,8 @@ public class ObjectManager : MonoBehaviour
 
     for (int i = -1; i <= 1; i++)
     {
-      GameObject.Instantiate(leftWall, new Vector3(gm.screenXMax, gm.screenYMax * i * 2, 0.0f), Quaternion.identity);
-      GameObject.Instantiate(rightWall, new Vector3(-gm.screenXMax, gm.screenYMax * i * 2, 0.0f), Quaternion.identity);
+      GameObject.Instantiate(leftWall, new Vector3(gm.screenXMax(), gm.screenYMax() * i * 2, 0.0f), Quaternion.identity);
+      GameObject.Instantiate(rightWall, new Vector3(-gm.screenXMax(), gm.screenYMax() * i * 2, 0.0f), Quaternion.identity);
     }
   }
 
@@ -61,10 +61,10 @@ public class ObjectManager : MonoBehaviour
           {
             GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count)];
             var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
-            float xExtent = gm.screenXMax - newObject.transform.lossyScale.x * 1.5f;
+            float xExtent = gm.screenXMax() - newObject.transform.lossyScale.x * 1.5f;
             newObject.transform.position = new Vector3(
                 Random.Range(-xExtent, xExtent),
-                -gm.screenYMax - newObject.transform.lossyScale.y,
+                -gm.screenYMax() - newObject.transform.lossyScale.y,
                 -0.1f);
             float r = Random.Range(0.0f, 1.0f);
             timeToNextDanger = Mathf.Lerp(dangerMinTime, dangerMaxTime, r * r);
@@ -86,8 +86,8 @@ public class ObjectManager : MonoBehaviour
             cliffSide *= -1.0f;
             var extent = newObject.transform.lossyScale;
             newObject.transform.position = new Vector3(
-                side * gm.screenXMax - side * extent.x * 0.56f, //Random.Range(0.0f, extent.x * 0.7f),
-                -gm.screenYMax - extent.y * 0.5f,
+                side * gm.screenXMax() - side * extent.x * 0.56f, //Random.Range(0.0f, extent.x * 0.7f),
+                -gm.screenYMax() - extent.y * 0.5f,
                 -0.2f);
             if (side < 0.0f) {
               newBase.Flippendo();
@@ -101,10 +101,10 @@ public class ObjectManager : MonoBehaviour
           if (timeToNextCoin <= 0.0f)
           {
             float phase = Mathf.PingPong(Time.time + coinRoadOffset, coinFunctionSpeed) / coinFunctionSpeed;
-            float extent = gm.screenXMax * coinExtentent;
+            float extent = gm.screenXMax() * coinExtentent;
             Vector3 pos = new Vector3(
               EasingFunction.EaseInOutQuad(-extent, extent, phase),
-              -gm.screenYMax - 1.0f,
+              -gm.screenYMax() - 1.0f,
               0.0f
             );
 

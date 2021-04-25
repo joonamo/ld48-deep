@@ -36,7 +36,7 @@ public class player : MonoBehaviour
 
   float yPer(float offset = 0.0f)
   {
-    return Mathf.Clamp01(transform.position.y + depthTarget / (gm.screenXMax + offset - depthTarget));
+    return Mathf.Clamp01(transform.position.y + depthTarget / (gm.screenXMax() + offset - depthTarget));
   }
 
   // Update is called once per frame
