@@ -77,6 +77,8 @@ public class GameManager : MonoBehaviour
   {
     score += multiplier;
     scoreDisplay.ShowScore(score);
+
+    player.MakeHappy();
   }
 
   public void addMultiplier()
@@ -86,5 +88,17 @@ public class GameManager : MonoBehaviour
     {
       Instantiate(goal, new Vector3(0.0f, -screenYMax - 5.0f, 0.0f), Quaternion.identity);
     }
+
+    player.MakeHappy();
+  }
+
+  public void reportGoal() {
+    state = GameState.outro;
+    player.MakeHappy();
+  }
+
+  public void reportDeath() {
+    state = GameState.outro;
+    player.MakeDead();
   }
 }

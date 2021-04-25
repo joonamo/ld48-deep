@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2759878329411327200
+--- !u!1 &682226483924381106
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,50 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2759878329411327213}
-  - component: {fileID: 2759878329411327212}
-  - component: {fileID: 2759878329411327203}
-  - component: {fileID: 2759878329411327201}
-  - component: {fileID: 86512426664397054}
-  - component: {fileID: 6528337417753441951}
-  - component: {fileID: 5726284972145155320}
-  - component: {fileID: 8133274845339627048}
+  - component: {fileID: 6461386065887063398}
+  - component: {fileID: 3031268599531979510}
+  - component: {fileID: 2300245920997635004}
+  - component: {fileID: 8826455790285210253}
   m_Layer: 0
-  m_Name: Mermaid
+  m_Name: Quad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2759878329411327213
+--- !u!4 &6461386065887063398
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2759878329411327200}
+  m_GameObject: {fileID: 682226483924381106}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.3808074, y: 4.369937, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalPosition: {x: 0.135, y: 0.029, z: 0}
+  m_LocalScale: {x: 1.032, y: 1.155, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2759878329411327213}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2759878329411327212
+--- !u!33 &3031268599531979510
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2759878329411327200}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &2759878329411327203
+  m_GameObject: {fileID: 682226483924381106}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &2300245920997635004
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2759878329411327200}
+  m_GameObject: {fileID: 682226483924381106}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -86,6 +82,56 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8826455790285210253
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 682226483924381106}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &2759878329411327200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2759878329411327213}
+  - component: {fileID: 2759878329411327201}
+  - component: {fileID: 86512426664397054}
+  - component: {fileID: 6528337417753441951}
+  - component: {fileID: 5726284972145155320}
+  - component: {fileID: 8133274845339627048}
+  m_Layer: 0
+  m_Name: Mermaid
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2759878329411327213
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2759878329411327200}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.3808074, y: 4.369937, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_Children:
+  - {fileID: 6461386065887063398}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2759878329411327201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,8 +147,10 @@ MonoBehaviour:
   wrapping: 0
   yExtent: 1
   stopAtZero: 1
-  contactJump: 2
+  staticOnly: 0
+  contactJump: 3
   contactAction: 3
+  myMesh: {fileID: 0}
 --- !u!114 &86512426664397054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,8 +175,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
+  m_Radius: 0.29
+  m_Height: 0
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &5726284972145155320

@@ -45,7 +45,8 @@ public class BaseObject : MonoBehaviour
     {
       case (GameState.game):
         {
-          if (staticOnly) {
+          if (staticOnly)
+          {
             break;
           }
           if (!stopAtZero || transform.position.y < 0.0f)
@@ -77,31 +78,6 @@ public class BaseObject : MonoBehaviour
     if (other.transform.tag == "Player")
     {
       player p = other.transform.GetComponent<player>();
-      switch (contactJump)
-      {
-        case (ContactJump.left):
-          {
-            p.JumpLeft();
-            break;
-          }
-        case (ContactJump.right):
-          {
-            p.JumpRight();
-            break;
-          }
-        case (ContactJump.both):
-          {
-            if (Random.Range(0.0f, 1.0f) < 0.5f)
-            {
-              p.JumpRight();
-            }
-            else
-            {
-              p.JumpLeft();
-            }
-            break;
-          }
-      }
 
       switch (contactAction)
       {
@@ -119,27 +95,58 @@ public class BaseObject : MonoBehaviour
           }
         case (ContactAction.damage):
           {
-            Debug.Log("Death");
-            Debug.DrawLine(transform.position, other.transform.position, Color.white, 2.0f);
+            gm.reportDeath();
             break;
           }
         case (ContactAction.goal):
           {
-            // TODO
+            gm.reportGoal();
+            break;
+          }
+        case (ContactAction.bounce):
+          {
+            switch (contactJump)
+            {
+              case (ContactJump.left):
+                {
+                  p.JumpLeft();
+                  break;
+                }
+              case (ContactJump.right):
+                {
+                  p.JumpRight();
+                  break;
+                }
+              case (ContactJump.both):
+                {
+                  if (Random.Range(0.0f, 1.0f) < 0.5f)
+                  {
+                    p.JumpRight();
+                  }
+                  else
+                  {
+                    p.JumpLeft();
+                  }
+                  break;
+                }
+            }
             break;
           }
       }
     }
   }
 
-  Transform getRendable() {
-    if (!myMesh) {
+  Transform getRendable()
+  {
+    if (!myMesh)
+    {
       myMesh = GetComponentInChildren<MeshFilter>();
     }
     return myMesh.transform;
   }
 
-  public void Flippendo() {
+  public void Flippendo()
+  {
     // print("flip");
     transform.eulerAngles = new Vector3(0.0f, 180.0f, 0.0f);
   }
