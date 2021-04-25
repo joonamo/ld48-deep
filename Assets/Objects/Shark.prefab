@@ -50,6 +50,7 @@ MonoBehaviour:
   wrapping: 0
   yExtent: 1
   stopAtZero: 0
+  staticOnly: 0
   contactJump: 2
   contactAction: 0
   myMesh: {fileID: 0}
@@ -63,7 +64,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.77
+  m_Radius: 0.23
   m_Height: 4.63
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}

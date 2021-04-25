@@ -38,6 +38,15 @@ public class player : MonoBehaviour
     {
       case (GameState.game):
         {
+          if (Input.GetButtonDown("Right"))
+          {
+            JumpRight();
+          }
+          else if (Input.GetButtonDown("Left"))
+          {
+            JumpLeft();
+          }
+          
           float y = transform.position.y;
           float clampY = Mathf.Clamp(y - depthTarget, 0.0f, 1.0f);
           extSpeed = speed > 0 ? 0 : speed * (1.0f - clampY);
@@ -55,15 +64,6 @@ public class player : MonoBehaviour
           if (absVerSpeed > verSpeedMin)
           {
             verSpeed = Mathf.Sign(verSpeed) * (absVerSpeed - verSpeedDampen * Time.deltaTime);
-          }
-
-          if (Input.GetButtonDown("Right"))
-          {
-            JumpRight();
-          }
-          else if (Input.GetButtonDown("Left"))
-          {
-            JumpLeft();
           }
           break;
         }

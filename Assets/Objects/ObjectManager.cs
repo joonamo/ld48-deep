@@ -31,6 +31,8 @@ public class ObjectManager : MonoBehaviour
   public float cliffMinTime = 0.4f;
   public float cliffMaxTime = 4.0f;
   public float timeToNextCliff = 1.0f;
+  public float cliffSide = 1.0f;
+  public int previousCliff = -1;
 
 
   // Start is called before the first frame update
@@ -71,10 +73,17 @@ public class ObjectManager : MonoBehaviour
           timeToNextCliff = timeToNextCliff - Time.deltaTime;
           if (timeToNextCliff <= 0.0f)
           {
-            GameObject toSpawn = cliffObjects[Random.Range(0, cliffObjects.Count)];
+            int rand = Random.Range(0, cliffObjects.Count);
+            while (rand == previousCliff) {
+              rand = Random.Range(0, cliffObjects.Count);
+            }
+            previousCliff = rand;
+            GameObject toSpawn = cliffObjects[rand];
+
             var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
             BaseObject newBase = newObject.GetComponent<BaseObject>();
-            float side = Random.Range(-1.0f, 1.0f) < 0.0f ? -1.0f : 1.0f;
+            float side = cliffSide;
+            cliffSide *= -1.0f;
             var extent = newObject.transform.lossyScale;
             newObject.transform.position = new Vector3(
                 side * gm.screenXMax - side * extent.x * 0.56f, //Random.Range(0.0f, extent.x * 0.7f),

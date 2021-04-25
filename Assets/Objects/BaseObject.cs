@@ -15,7 +15,8 @@ public enum ContactAction
   damage,
   score,
   multiplier,
-  goal
+  goal,
+  bounce
 }
 
 public class BaseObject : MonoBehaviour
@@ -24,6 +25,7 @@ public class BaseObject : MonoBehaviour
   public bool wrapping = false;
   public float yExtent = 5.0f;
   public bool stopAtZero = false;
+  public bool staticOnly = false;
 
   public ContactJump contactJump = ContactJump.none;
   public ContactAction contactAction = ContactAction.damage;
@@ -43,6 +45,9 @@ public class BaseObject : MonoBehaviour
     {
       case (GameState.game):
         {
+          if (staticOnly) {
+            break;
+          }
           if (!stopAtZero || transform.position.y < 0.0f)
           {
             transform.Translate(0.0f, gm.generalSpeed * Time.deltaTime, 0.0f, Space.World);
@@ -114,7 +119,8 @@ public class BaseObject : MonoBehaviour
           }
         case (ContactAction.damage):
           {
-            // TODO
+            Debug.Log("Death");
+            Debug.DrawLine(transform.position, other.transform.position, Color.white, 2.0f);
             break;
           }
         case (ContactAction.goal):

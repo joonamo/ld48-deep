@@ -19,7 +19,7 @@ public class Shaker : MonoBehaviour
         transform.eulerAngles = new Vector3(
             transform.eulerAngles.x,
             transform.eulerAngles.y,
-            EasingFunction.EaseInOutCubic(-maximum, maximum, phase)
+            EasingFunction.EaseInOutQuad(-maximum, maximum, phase)
         );
     }
 }

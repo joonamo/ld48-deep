@@ -10,7 +10,7 @@ public class Chaser : MonoBehaviour
   public float maxExtent = 0.5f;
   float extent = 0.0f;
   bool lastDirection = true;
-  float lastX = 0.0f;
+  float lastX = 999.0f;
   BaseObject myBase;
 
   // Start is called before the first frame update
@@ -20,8 +20,6 @@ public class Chaser : MonoBehaviour
     gm = GameObject.FindObjectOfType<GameManager>();
     extent = gm.screenXMax * maxExtent;
     myBase = GetComponent<BaseObject>();
-
-    lastX = transform.position.x;
   }
 
   // Update is called once per frame
@@ -37,7 +35,6 @@ public class Chaser : MonoBehaviour
     transform.position = newPos;
 
     bool direction = lastX < newPos.x;
-    // print("" + lastX + ", " + newPos.x);
     if (direction != lastDirection)
     {
       if (direction)

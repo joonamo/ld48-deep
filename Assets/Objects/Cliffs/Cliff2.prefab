@@ -61,7 +61,7 @@ MonoBehaviour:
   wrapping: 0
   yExtent: 1
   stopAtZero: 0
-  contactJump: 2
+  contactJump: 3
   contactAction: 0
   myMesh: {fileID: 0}
 --- !u!1 &6383916673376084661
