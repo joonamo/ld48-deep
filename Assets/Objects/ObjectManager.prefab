@@ -47,6 +47,7 @@ MonoBehaviour:
   rightWall: {fileID: 2759878329411327200, guid: 27680c62ba6394db8aef9a80bb77eaed, type: 3}
   dangerObjects:
   - {fileID: 2759878329411327200, guid: e1d76d2768457468e81bddce1703401c, type: 3}
+  - {fileID: 2759878329411327200, guid: ede1a340827714e20a3398c5de59226b, type: 3}
   dangerMinTime: 1
   dangerMaxTime: 3
   timeToNextDanger: 5

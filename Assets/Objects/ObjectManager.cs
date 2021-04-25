@@ -37,7 +37,7 @@ public class ObjectManager : MonoBehaviour
     timeToNextDanger = timeToNextDanger - Time.deltaTime;
     if (timeToNextDanger <= 0.0f)
     {
-      GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count - 1)];
+      GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count)];
       var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
       float xExtent = gm.screenXMax - newObject.transform.lossyScale.x * 0.5f;
       newObject.transform.position = new Vector3(
@@ -51,7 +51,7 @@ public class ObjectManager : MonoBehaviour
     timeToNextCliff = timeToNextCliff - Time.deltaTime;
     if (timeToNextCliff <= 0.0f)
     {
-      GameObject toSpawn = cliffObjects[Random.Range(0, cliffObjects.Count - 1)];
+      GameObject toSpawn = cliffObjects[Random.Range(0, cliffObjects.Count)];
       var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
       float side = Random.Range(-1.0f, 1.0f) < 0.0f ? -1.0f : 1.0f;
       var extent = newObject.transform.lossyScale;
