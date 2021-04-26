@@ -137,7 +137,6 @@ public class ObjectManager : MonoBehaviour
     timeToNextCliff = 1.0f;
 
     foreach (GameObject go in GameObject.FindGameObjectsWithTag("RemoveOnRestart")) {
-      print(go);
       Destroy(go);
     }
   }

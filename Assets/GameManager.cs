@@ -35,6 +35,10 @@ public class GameManager : MonoBehaviour
 
   public List<ShellUI> shellUis = new List<ShellUI>();
 
+  public AudioSource music;  
+
+  Intro intro;
+
   // Start is called before the first frame update
   void Start()
   {
@@ -50,11 +54,14 @@ public class GameManager : MonoBehaviour
           if (Input.GetButtonDown("Button"))
           {
             changeState(GameState.intro);
+            intro.Reset();
+            if (!music.isPlaying) {
+              music.Play();
+            }
           }
           break;
         }
       case (GameState.intro): {
-        changeState(GameState.game);
         break;
       }
       case (GameState.outro):
@@ -68,7 +75,7 @@ public class GameManager : MonoBehaviour
     }
   }
 
-  void changeState(GameState newState)
+  public void changeState(GameState newState)
   {
     state = newState;
     stateChangeTime = Time.time;
@@ -93,14 +100,22 @@ public class GameManager : MonoBehaviour
     scoreDisplay.ShowScore(score);
   }
 
+  public void registerIntro(Intro newIntro) {
+    intro = newIntro;
+  }
+
   public void addPoint()
   {
+    if (state != GameState.game) return;
+
     score += multiplier;
     scoreDisplay.ShowScore(score);
   }
 
   public void addMultiplier()
   {
+    if (state != GameState.game) return;
+
     multiplier += 1;
     if (multiplier == multiplierGoal)
     {
@@ -117,13 +132,19 @@ public class GameManager : MonoBehaviour
   }
 
   public void reportGoal() {
+    if (state != GameState.game) return;
+
     changeState(GameState.outro);
     player.MakeHappy(true);
+    intro.ReportHappy();
   }
 
   public void reportDeath() {
+    if (state != GameState.game) return;
+
     changeState(GameState.outro);
     player.MakeDead();
+    intro.ReportSad();
   }
 
   public void ResetGame() {
@@ -136,6 +157,7 @@ public class GameManager : MonoBehaviour
     }
 
     objectManager.Reset();
+    intro.Reset();
 
     changeState(GameState.intro);
   }
