@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 8133274845339627048}
   m_Layer: 0
   m_Name: Mermaid
-  m_TagString: Untagged
+  m_TagString: RemoveOnRestart
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
