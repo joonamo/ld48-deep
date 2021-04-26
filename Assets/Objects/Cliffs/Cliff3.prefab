@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wrapping: 0
-  yExtent: 1
+  yExtent: 3
   stopAtZero: 0
   staticOnly: 0
   contactJump: 3

@@ -50,6 +50,11 @@ public class Intro : MonoBehaviour
 
       float comic1AppearPhase = (Mathf.Clamp(t, 0.0f, comicAppearTime)) / comicAppearTime;
       float comicDisappearPhase = (Mathf.Clamp(t, comicDelay * 3, comicDelay * 3 + comicAppearTime) - comicDelay * 3) / comicAppearTime;
+
+      if (t > 0.1f && Input.GetButtonDown("Button")) {
+        comicDisappearPhase = 1.0f;
+      }
+
       setComic(comic1AppearPhase, comicDisappearPhase, comic1TargetPos, comic1.transform);
 
       float comic2AppearPhase = (Mathf.Clamp(t, comicDelay, comicDelay + comicAppearTime) - comicDelay) / comicAppearTime;
@@ -89,7 +94,7 @@ public class Intro : MonoBehaviour
 
   void setComic(float appearPhase, float disappearPhase, Vector3 targetPos, Transform t)
   {
-    if (appearPhase < 1.0f)
+    if (disappearPhase == 0.0f)
     {
       t.localPosition = new Vector3(
         EasingFunction.EaseOutQuart(-appearDistance, targetPos.x, appearPhase),
