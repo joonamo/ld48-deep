@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
   public float generalSpeed() { return 8.0f; }
 
   public player player;
+  public ObjectManager objectManager;
 
   public int score = 0;
   public int multiplier = 1;
@@ -48,15 +49,19 @@ public class GameManager : MonoBehaviour
         {
           if (Input.GetButtonDown("Button"))
           {
-            changeState(GameState.game);
+            changeState(GameState.intro);
           }
           break;
         }
+      case (GameState.intro): {
+        changeState(GameState.game);
+        break;
+      }
       case (GameState.outro):
       case (GameState.gameOver): {
           if (Input.GetButtonDown("Button"))
           {
-            SceneManager.LoadScene(0);
+            ResetGame();
           }
         break;
       }
@@ -76,6 +81,10 @@ public class GameManager : MonoBehaviour
   public void registerPlayer(player newPlayer)
   {
     player = newPlayer;
+  }
+
+  public void registerObjectManager(ObjectManager om) {
+    objectManager = om;
   }
 
   public void registerScoreDisplay(Score newDisplay)
@@ -108,12 +117,26 @@ public class GameManager : MonoBehaviour
   }
 
   public void reportGoal() {
-    state = GameState.outro;
+    changeState(GameState.outro);
     player.MakeHappy(true);
   }
 
   public void reportDeath() {
-    state = GameState.outro;
+    changeState(GameState.outro);
     player.MakeDead();
+  }
+
+  public void ResetGame() {
+    player.Reset();
+    score = 0;
+    scoreDisplay.ShowScore(score);
+    multiplier = 1;
+    foreach (ShellUI shell in shellUis) {
+      shell.turnOff();
+    }
+
+    objectManager.Reset();
+
+    changeState(GameState.intro);
   }
 }

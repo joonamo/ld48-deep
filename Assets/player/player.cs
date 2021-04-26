@@ -25,13 +25,14 @@ public class player : MonoBehaviour
   public Renderer rend;
 
   GameManager gm;
+  Vector3 initialPosition;
 
   // Start is called before the first frame update
   void Start()
   {
     gm = GameObject.FindObjectOfType<GameManager>();
     gm.registerPlayer(this);
-
+    initialPosition = transform.position;
   }
 
   float yPer(float offset = 0.0f)
@@ -120,5 +121,13 @@ public class player : MonoBehaviour
   public void MakeDead() {
     rend.material.mainTexture = dead;
     regularTimer = 0.2f;
+  }
+
+  public void Reset() {
+    transform.position = initialPosition;
+    regularTimer = 0.0f;
+    rend.material.mainTexture = regular;
+    speed = 0.0f;
+    verSpeed = 0.0f;
   }
 }

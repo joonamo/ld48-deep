@@ -16,4 +16,9 @@ public class ShellUI : MonoBehaviour
   {
     rend.enabled = true;
   }
+
+  public void turnOff()
+  {
+    rend.enabled = false;
+  }
 }

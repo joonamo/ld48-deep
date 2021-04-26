@@ -39,6 +39,7 @@ public class ObjectManager : MonoBehaviour
   void Start()
   {
     gm = GameObject.FindObjectOfType<GameManager>();
+    gm.registerObjectManager(this);
 
     coinRoadF = EasingFunction.GetEasingFunction(coinRoad);
 
@@ -61,6 +62,8 @@ public class ObjectManager : MonoBehaviour
           {
             GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count)];
             var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
+            newObject.tag = "RemoveOnRestart";
+            
             float xExtent = gm.screenXMax() - newObject.transform.lossyScale.x * 1.5f;
             newObject.transform.position = new Vector3(
                 Random.Range(-xExtent, xExtent),
@@ -82,6 +85,8 @@ public class ObjectManager : MonoBehaviour
 
             var newObject = GameObject.Instantiate(toSpawn, new Vector3(0.0f, -999.0f, 0.0f), Quaternion.identity);
             BaseObject newBase = newObject.GetComponent<BaseObject>();
+            newObject.tag = "RemoveOnRestart";
+
             float side = cliffSide;
             cliffSide *= -1.0f;
             var extent = newObject.transform.lossyScale;
@@ -109,7 +114,8 @@ public class ObjectManager : MonoBehaviour
             );
 
             var o = coinsSpawned > 0 && coinsSpawned % multiplierTime == 0 ? megaCoin : coin;
-            Instantiate(o, pos, Quaternion.identity);
+            var newObject = Instantiate(o, pos, Quaternion.identity);
+            newObject.tag = "RemoveOnRestart";
 
             timeToNextCoin = coinInterval;
             coinsSpawned++;
@@ -121,6 +127,18 @@ public class ObjectManager : MonoBehaviour
           }
           break;
         }
+    }
+  }
+
+  public void Reset() {
+    timeToNextCoin = 0.0f;
+    coinsSpawned = 0;
+    timeToNextDanger = 5.0f;
+    timeToNextCliff = 1.0f;
+
+    foreach (GameObject go in GameObject.FindGameObjectsWithTag("RemoveOnRestart")) {
+      print(go);
+      Destroy(go);
     }
   }
 }
