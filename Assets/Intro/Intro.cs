@@ -82,6 +82,10 @@ public class Intro : MonoBehaviour
 
       if (comicDisappearPhase >= 1.0f)
       {
+        if (!gm.music.isPlaying)
+        {
+          gm.music.Play();
+        }
         gm.changeState(GameState.game);
       }
 
@@ -102,11 +106,6 @@ public class Intro : MonoBehaviour
         sound.pitch = 1.2f;
         sound.Play();
         audio3Played = true;
-
-        if (!gm.music.isPlaying)
-        {
-          gm.music.PlayDelayed(0.3f);
-        }
       }
     }
     else if (gm.state == GameState.outro)
