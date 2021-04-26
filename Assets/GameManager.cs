@@ -58,9 +58,6 @@ public class GameManager : MonoBehaviour
           {
             changeState(GameState.intro);
             intro.Reset();
-            if (!music.isPlaying) {
-              music.Play();
-            }
           }
           break;
         }
@@ -140,6 +137,8 @@ public class GameManager : MonoBehaviour
 
   public void reportGoal() {
     if (state != GameState.game) return;
+
+    collectBig.Play();
 
     changeState(GameState.outro);
     player.MakeHappy(true);

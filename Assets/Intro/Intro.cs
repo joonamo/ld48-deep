@@ -17,6 +17,12 @@ public class Intro : MonoBehaviour
   Vector3 comic2TargetPos;
   Vector3 comic3TargetPos;
 
+  bool audio1Played = false;
+  bool audio2Played = false;
+  bool audio3Played = false;
+  public AudioSource sound;
+  public float audioPhase = 0.8f;
+
   public float outroDelay = 5.0f;
 
   GameManager gm;
@@ -78,6 +84,30 @@ public class Intro : MonoBehaviour
       {
         gm.changeState(GameState.game);
       }
+
+      if (!audio1Played && comic1AppearPhase > audioPhase)
+      {
+        sound.pitch = 1.0f;
+        sound.Play();
+        audio1Played = true;
+      }
+      if (!audio2Played && comic2AppearPhase > audioPhase)
+      {
+        sound.pitch = 1.1f;
+        sound.Play();
+        audio2Played = true;
+      }
+      if (!audio3Played && comic3AppearPhase > audioPhase)
+      {
+        sound.pitch = 1.2f;
+        sound.Play();
+        audio3Played = true;
+
+        if (!gm.music.isPlaying)
+        {
+          gm.music.PlayDelayed(0.3f);
+        }
+      }
     }
     else if (gm.state == GameState.outro)
     {
@@ -130,6 +160,9 @@ public class Intro : MonoBehaviour
 
   public void Reset() {
     bgRend.material.mainTexture = comicBackground;
+    audio1Played = false;
+    audio2Played = false;
+    audio3Played = false;
 
     text.text = "";
   }
