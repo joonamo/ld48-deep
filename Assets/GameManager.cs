@@ -35,7 +35,10 @@ public class GameManager : MonoBehaviour
 
   public List<ShellUI> shellUis = new List<ShellUI>();
 
-  public AudioSource music;  
+  public AudioSource music;
+  public AudioSource collect;
+  public AudioSource collectBig;
+  public AudioSource death;
 
   Intro intro;
 
@@ -108,6 +111,8 @@ public class GameManager : MonoBehaviour
   {
     if (state != GameState.game) return;
 
+    collect.Play();
+
     score += multiplier;
     scoreDisplay.ShowScore(score);
   }
@@ -115,6 +120,8 @@ public class GameManager : MonoBehaviour
   public void addMultiplier()
   {
     if (state != GameState.game) return;
+
+    collectBig.Play();
 
     multiplier += 1;
     if (multiplier == multiplierGoal)
@@ -141,6 +148,8 @@ public class GameManager : MonoBehaviour
 
   public void reportDeath() {
     if (state != GameState.game) return;
+
+    death.Play();
 
     changeState(GameState.outro);
     player.MakeDead();

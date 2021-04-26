@@ -27,6 +27,8 @@ public class Intro : MonoBehaviour
   public Texture2D sadEnd;
   public Renderer bgRend;
 
+  public TMPro.TextMeshPro text; 
+
   // Start is called before the first frame update
   void Start()
   {
@@ -39,6 +41,8 @@ public class Intro : MonoBehaviour
 
     gm = GameObject.FindObjectOfType<GameManager>();
     gm.registerIntro(this);
+
+    text.text = "";
   }
 
   // Update is called once per frame
@@ -78,6 +82,10 @@ public class Intro : MonoBehaviour
     else if (gm.state == GameState.outro)
     {
       float t = gm.timeInState();
+      if (t < 0.1) {
+        text.text = gm.score.ToString("#0000");
+      }
+
       float phase = (Mathf.Clamp(t, outroDelay, outroDelay + comicAppearTime) - outroDelay) / comicAppearTime;
 
       bg.transform.localPosition = new Vector3(
@@ -122,5 +130,7 @@ public class Intro : MonoBehaviour
 
   public void Reset() {
     bgRend.material.mainTexture = comicBackground;
+
+    text.text = "";
   }
 }

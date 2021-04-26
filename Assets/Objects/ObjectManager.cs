@@ -34,6 +34,7 @@ public class ObjectManager : MonoBehaviour
   public float cliffSide = 1.0f;
   public int previousCliff = -1;
 
+  bool hasPressed = false;
 
   // Start is called before the first frame update
   void Start()
@@ -57,7 +58,13 @@ public class ObjectManager : MonoBehaviour
     {
       case (GameState.game):
         {
-          timeToNextDanger = timeToNextDanger - Time.deltaTime;
+          if (hasPressed) {
+            timeToNextCliff = timeToNextCliff - Time.deltaTime;
+            timeToNextDanger = timeToNextDanger - Time.deltaTime;
+          } else if (Input.GetButtonDown("Right") || Input.GetButtonDown("Left") || gm.timeInState() > 30.0f) {
+            hasPressed = true;
+          }
+
           if (timeToNextDanger <= 0.0f)
           {
             GameObject toSpawn = dangerObjects[Random.Range(0, dangerObjects.Count)];
@@ -73,7 +80,6 @@ public class ObjectManager : MonoBehaviour
             timeToNextDanger = Mathf.Lerp(dangerMinTime, dangerMaxTime, r * r);
           }
 
-          timeToNextCliff = timeToNextCliff - Time.deltaTime;
           if (timeToNextCliff <= 0.0f)
           {
             int rand = Random.Range(0, cliffObjects.Count);
@@ -133,8 +139,9 @@ public class ObjectManager : MonoBehaviour
   public void Reset() {
     timeToNextCoin = 0.0f;
     coinsSpawned = 0;
-    timeToNextDanger = 5.0f;
-    timeToNextCliff = 1.0f;
+    timeToNextDanger = 3.0f;
+    timeToNextCliff = 2.0f;
+    hasPressed = false;
 
     foreach (GameObject go in GameObject.FindGameObjectsWithTag("RemoveOnRestart")) {
       Destroy(go);
